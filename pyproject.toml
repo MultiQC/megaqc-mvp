@@ -1,0 +1,35 @@
+[project]
+name = "multiqc-evals"
+version = "0.1.0"
+description = "Evaluation notebooks for MultiQC"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "pandas",
+    "pyarrow",
+    "trino",
+    "boto3",
+    "s3fs",
+    "duckdb",
+    "ipykernel>=6.29.5",
+    "plotly>=6.0.1",
+    "kaleido==1.0.0rc11",
+    "nbformat>=5.10.4",
+    "pymongo>=4.12.0",
+    "pyiceberg[pandas,s3fs]>=0.9.0",
+    "cloudpathlib[s3]>=0.21.0",
+    "sqlalchemy>=2.0.40",
+    "dotenv>=0.9.9",
+    "python-dotenv>=1.1.0",
+    "polars>=1.27.1",
+    "pyspark>=3.5.5",
+]
+
+[project.optional-dependencies]
+dev = ["ruff"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+lint.ignore = ["F401"]   # unused-import

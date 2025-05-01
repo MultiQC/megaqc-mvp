@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for seqera-superset-demo on 2025-05-01T14:20:41+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'seqera-superset-demo'
+primary_region = 'mad'
+
+[build]
+dockerfile = 'Dockerfile'
+
+[[mounts]]
+source = 'data_vol'
+destination = '/app/superset_home'
+
+[http_service]
+internal_port = 8088
+min_machines_running = 0
+
+[[vm]]
+memory = '512mb'
+cpu_kind = 'shared'
+cpus = 1
