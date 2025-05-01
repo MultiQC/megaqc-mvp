@@ -5,7 +5,7 @@ FROM apache/superset
 USER root
 # 1. Install DuckDB + SQLAlchemy dialect + httpfs extension for S3/HTTPS
 RUN pip install --no-cache-dir \
-    duckdb==1.2.0 \
+    duckdb==1.2.2 \
     duckdb-engine \
     boto3
 
