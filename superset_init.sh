@@ -10,6 +10,8 @@ if [ ! -f "$HOME/.initialized" ]; then
       --email vladislav.sav@gmail.com \
       --password "${PASSWORD}"
   superset db upgrade
+  superset init              # 🔑 create roles & permissions
+
   touch "$HOME/.initialized"
 fi
 
