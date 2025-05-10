@@ -1,12 +1,18 @@
-# fly.toml app configuration file generated for superset-fly on 2025-05-09T21:29:58+02:00
+# fly.toml app configuration file generated for megaqc-superset on 2025-05-10T14:01:46+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'superset-fly'
+app = 'megaqc-superset'
 primary_region = 'mad'
 
 [build]
+
+[env]
+  TRINO_CATALOG = 'iceberg'
+  TRINO_HOST = 'megaqc-trino.internal'
+  TRINO_PORT = '8080'
+  TRINO_USER = 'admin'
 
 [http_service]
   internal_port = 8080
@@ -15,6 +21,11 @@ primary_region = 'mad'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
+
+  [http_service.concurrency]
+    type = 'connections'
+    hard_limit = 250
+    soft_limit = 200
 
 [[vm]]
   memory = '1gb'

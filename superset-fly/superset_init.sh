@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+# Set a default Trino host if not provided
+TRINO_HOST=${TRINO_HOST:-trino-server}
+TRINO_PORT=${TRINO_PORT:-8080}
+TRINO_USER=${TRINO_USER:-admin}
+TRINO_CATALOG=${TRINO_CATALOG:-iceberg}
+
 # The base image runs as user "superset"; HOME=/app/superset_home
 if [ ! -f "$HOME/.initialized" ]; then
   superset fab create-admin \
@@ -12,10 +18,11 @@ if [ ! -f "$HOME/.initialized" ]; then
   superset db upgrade
   superset init              # 🔑 create roles & permissions
 
-  # Create Trino database connection
+  # Create Trino database connection using environment variables
+  echo "Connecting to Trino at ${TRINO_HOST}:${TRINO_PORT}..."
   superset set-database-uri \
     --database-name "Trino" \
-    --uri "trino://admin@trino-server:8080/iceberg"
+    --uri "trino://${TRINO_USER}@${TRINO_HOST}:${TRINO_PORT}/${TRINO_CATALOG}"
 
   touch "$HOME/.initialized"
 fi
