@@ -8,11 +8,16 @@ if [ ! -f "$HOME/.initialized" ]; then
       --firstname Vladislav \
       --lastname Savelyev \
       --email vladislav.sav@gmail.com \
-      --password "${PASSWORD}"
+      --password "${PASSWORD:-admin}"
   superset db upgrade
   superset init              # 🔑 create roles & permissions
+
+  # Create Trino database connection
+  superset set-database-uri \
+    --database-name "Trino" \
+    --uri "trino://admin@trino-server:8080/iceberg"
 
   touch "$HOME/.initialized"
 fi
 
-exec superset run --host 0.0.0.0 --port 8088
+exec superset run --host 0.0.0.0 --port 8080

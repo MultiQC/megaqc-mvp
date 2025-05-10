@@ -4,12 +4,17 @@ FROM apache/superset
 
 USER root
 # 1. Install DuckDB + SQLAlchemy dialect + httpfs extension for S3/HTTPS
+# 2. Install Trino connector
 RUN pip install --no-cache-dir \
     duckdb==1.2.2 \
     duckdb-engine \
-    boto3
+    boto3 \
+    trino
 
-# 2. Copy helper that creates the first admin and then starts Superset
+# 3. Copy Superset config
+COPY superset_config.py /app/pythonpath/
+
+# 4. Copy helper that creates the first admin and then starts Superset
 COPY superset_init.sh /usr/bin/
 RUN chmod +x /usr/bin/superset_init.sh
 
