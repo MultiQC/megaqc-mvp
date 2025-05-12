@@ -1,7 +1,7 @@
 services:
   trino:
     build:
-      context: ./trino-fly
+      context: ./megaqc-trino
     container_name: trino-server
     ports:
       - "8081:8080"
@@ -14,7 +14,7 @@ services:
 
   superset:
     build:
-      context: ./superset-fly
+      context: ./megaqc-superset
     container_name: superset
     depends_on:
       - trino

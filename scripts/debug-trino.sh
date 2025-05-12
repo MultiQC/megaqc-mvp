@@ -17,7 +17,7 @@ fi
 
 echo -e "\n=== Instructions for debugging Trino on Fly.io ==="
 echo "1. SSH into the Trino container:"
-echo "   fly ssh console -a trino-fly"
+echo "   fly ssh console -a megaqc-trino"
 echo ""
 echo "2. Check environment variables:"
 echo "   env | grep -i AWS"
