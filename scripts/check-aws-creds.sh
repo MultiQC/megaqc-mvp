@@ -6,5 +6,5 @@ docker exec trino-server env | grep -i AWS
 
 echo ""
 echo "To check on Fly.io, run the following:"
-echo "fly ssh console -a trino-fly"
+echo "fly ssh console -a megaqc-trino"
 echo "env | grep -i AWS" 
